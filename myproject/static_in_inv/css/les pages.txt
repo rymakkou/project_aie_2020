@@ -1,0 +1,29 @@
+
+page 1 :	 index : une page accueil avec un texte de bien venue et une image
+                	 le formulaire de connexion =authetification
+             		    ....
+                  	    ....
+           	        
+
+
+
+page 2 :	inscription :	 deux boutons 1 ajouter un malade 2 ajouter un 		
+
+				 utilisateur deux formalaires avec des options 		
+
+		 akka?
+
+
+
+				une page d'inscription pour les utilisateurs j ai 	
+
+			compris (ok)
+              			inscription patient (ok)
+
+page 3 : 	rendez-vous :	1)- les horaire disponible d un rdv (ok)
+				2)- la liste de la file d'atente (ok)
+				3)- les satatistique (ok) 
+				
+				
+				
+				 j

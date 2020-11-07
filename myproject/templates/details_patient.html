@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Prise de rendez-vous</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- Google fonts - Popppins for copy-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
+    <!-- orion icons-->
+    <link rel="stylesheet" href="{% static 'css/orionicons.css' %}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{% static 'css/style.default.css' %}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{% static 'img/favicon.png?3' %}">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <!--fin des importations-->
+  <body>
+    <!-- navbar-->
+    <header class="header">
+      <nav class="navbar navbar-expand-lg px-4 py-2 bg-grey-100 shadow"><a href="#" class="sidebar-toggler text-green mr-4 mr-lg-5 lead"></a><a href="index.html" class="navbar-brand text-green text-green font-weight-bold text-uppercase text-lg">Prise de Rendez-vous</a>
+        <ul class="ml-auto d-flex align-items-right list-unstyled mb-0">
+          
+          <li class="sidebar-list-item"><a href="{% url 'myapp:tables' %}" class="sidebar-link text-muted active"><i class="o-user-details-1 mr-3 text-green"></i><span>Retour a l'admininistration</span></a></li>
+         
+        </ul>
+      </nav>
+    </header>
+	  
+        
+          <div class="container mt-5 mb-4 ">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class='card-title h4 text-center'>Fiche signalitique du patient</div>
+
+                <ul class="list-unstyled">
+                    <li class="list-item"><strong>Nom :</strong> {{detail.user.last_name}}</li>
+                    <li class="list-item"><strong>Prénom :</strong> {{detail.user.first_name}}</li>
+                    <li class="list-item"><strong>Date de naissance :</strong> {{detail.date_naissance}}</li>
+                    <li class="list-item"><strong>Adresse : </strong>{{detail.adresse}}</li>
+                    <li class="list-item"><strong>Groupe sanguin :</strong> {{detail.groupe_sanguin}}</li>
+                    <li class="list-item"><strong>N° Assurance</strong>{{detail.user.profile.num_assurance}}</li>
+                    
+                </ul>
+
+                {% if not has_dossier %}
+                 <p>Ce patient ne dispose pas encore de dossier médical</p>
+                 {% else %}
+                    <p>Ce patient posséde un dossier médical sous la référence <strong>{{has_dossier.id_dossier_patient}}</strong> </p>
+                    <p>Cliquez sur consulter pour voir le dossier <a href="{{has_dossier.get_absolute_url}}">Consulter</a></p>
+                 {% endif %}
+
+<br/>
+                 {% if not has_consul %}
+                 <p>Ce patient ne dispose pas encore de consultation</p>
+                 {% else %}
+                 <p><strong>Liste des Consultation du patient</strong></p>
+                 <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date de Consultation</th>
+                        <th scope="col">Motif de consultation</th>
+                        <th scope="col">Observations</th>
+                        
+                        
+                       
+                        
+                      </tr>
+                  </thead>
+                    <tbody>
+                      {% for i in has_consul %}
+                      <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{i.date_consultation}}</td>
+                        <td>{{i.motif_consultation}} h</td>
+                        <td>{{i.observations}}</td>
+                        
+                      </tr>
+                      {% endfor %}
+                      
+                    </tbody>
+                  </table>
+                    
+                    
+                 {% endif %}
+
+
+
+                 {% if not has_rdv %}
+                 <p>Ce patient ne dispose d'aucune date de rendez-vous</p>
+                 {% else %}
+                 <p><strong>Liste des rendez vous du patient</strong></p>
+                 <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date de rendez-vous</th>
+                        <th scope="col">Heure de rendez-vous</th>
+                        <th scope="col">Motif de rendez-vous</th>
+                        
+                        
+                       
+                        
+                      </tr>
+                  </thead>
+                    <tbody>
+                      {% for i in has_rdv %}
+                      <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{i.date_rendez_vous}}</td>
+                        <td>{{i.heure_rendez_vous}} h</td>
+                        <td>{{i.motif_rendez_vous}}</td>
+                        
+                      </tr>
+                      {% endfor %}
+                      
+                    </tbody>
+                  </table>
+                    
+                 {% endif %}
+
+
+
+                
+
+               
+               
+              </div>
+          </div>
+    <!-- JavaScript files-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/popper.js/umd/popper.min.js' %}"> </script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
+    <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="{% static 'js/charts-custom.js' %}"></script>
+    <script src="{% static 'js/front.js' %}"></script>
+  </body>
+</html>

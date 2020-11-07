@@ -1,0 +1,320 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Plateforme de prise de rendez vous en ligne </title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'PatientPanelAdd/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'PatientPanelAdd/css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{% static 'PatientPanelAdd/css/style.min.css' %}" rel="stylesheet">
+  <style type="text/css">
+    html,
+    body,
+    header,
+    .view {
+      height: 100%;
+    }
+
+    @media (max-width: 740px) {
+      html,
+      body,
+      header,
+      .view {
+        height: 1000px;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+      html,
+      body,
+      header,
+      .view {
+        height: 650px;
+      }
+    }
+    @media (min-width: 800px) and (max-width: 850px) {
+              .navbar:not(.top-nav-collapse) {
+                  background: #1C2331!important;
+              }
+          }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand" href="/" >
+        <strong>Prise de rendez vous en ligne</strong>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Accueil
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" >A propos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" >Blog</a>
+          </li>
+          
+        </ul>
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <a href="#" class="nav-link" >
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+        
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  <!-- Navbar -->
+<div class="container  py-5 z-depth-1" style="margin-top: 100px;">
+    <center><h3>Mon profile patient</h3></center>
+    <!--Section: Content-->
+    <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
+  
+      <h3 class="font-weight-bold">{{user.username}}</h3>
+  
+  
+      <hr class="my-5">
+  
+      <!--Grid row-->
+      <div class="row">
+  
+        <!--Grid column-->
+        <div class="col-lg-5 col-md-12 mb-0 mb-md-0">
+  
+          <h4 class="font-weight-bold">Information personnel</h4>
+  
+          
+  
+          <p class="font-weight-bold">Adresse Email:</p>
+  
+          <p class="mb-2">{{user.email}}</p>
+  
+          <p class="mb-2"><a href="#">Numéro de téléphone : </a></p>
+  
+          <p class="mb-4">{{user.profile.numero_telephone }}</p>
+  
+          <p class="font-weight-bold">Numéro de sécurité social :</p>
+  
+          <p class="mb-2">{{user.profile.num_assurance}}</p>
+  
+         
+  
+  
+        </div>
+        <!--Grid column-->
+  
+        <!--Grid column-->
+        <div class="col-lg-7 col-md-12 mb-4 mb-md-0">
+  
+         
+  
+          <div class="container mt-5 mb-4 ">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class='card-title h4 text-center'>Liste de mes consultation médical</div>
+                
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Date de consultation</th>
+                      <th scope="col">Motif de consultation</th>
+                      <th scope="col">Resultat de consultation</th>
+                      
+                     
+                      
+                    </tr>
+                </thead>
+                  <tbody>
+                    {% for i in consultation %}
+                    <tr>
+                      <th scope="row">{{forloop.counter}}</th>
+                      <td>{{i.date_consultation}}</td>
+                      <td>{{i.motif_consultation}}</td>
+                      <td>{{i.observations}}</td>        
+                     
+                    </tr>
+                    {% endfor %}
+                    
+                  </tbody>
+                </table>
+               
+              </div>
+          </div>
+          </div>
+
+          <div class="container mt-5 mb-4 ">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class='card-title h4 text-center'>Liste de mes rendez-vous</div>
+                
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Date de rendez-vous</th>
+                      <th scope="col">Heure de rendez-vous</th>
+                      <th scope="col">Motif de rendez-vous</th>
+                      
+                     
+                      
+                    </tr>
+                </thead>
+                  <tbody>
+                    {% for i in rdv %}
+                    <tr>
+                      <th scope="row">{{forloop.counter}}</th>
+                      <td>{{i.date_rendez_vous}}</td>
+                      <td>{{i.heure_rendez_vous}}</td>
+                      <td>{{i.motif_rendez_vous}}</td>        
+                     
+                    </tr>
+                    {% endfor %}
+
+                    
+                  </tbody>
+                  
+                    
+                </table>
+                <a href="{% url 'myapp:patient_create_rdv' %}" class="btn btn-primary float-right" >Planifier un rendz-vous</a>
+               
+              </div>
+          </div>
+          </div>
+  
+        </div>
+        <!--Grid column-->
+  
+      </div>
+      <!--Grid row-->
+  
+  
+    </section>
+    <!--Section: Content-->
+  
+  
+  </div>
+  
+
+
+   <!--Footer-->
+   <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+    <!--Call to action-->
+    <div class="pt-4">
+      <a class="btn btn-outline-white" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank" role="button">Download MDB
+        <i class="fas fa-download ml-2"></i>
+      </a>
+      <a class="btn btn-outline-white" href="https://mdbootstrap.com/education/bootstrap/" target="_blank" role="button">Start free tutorial
+        <i class="fas fa-graduation-cap ml-2"></i>
+      </a>
+    </div>
+    <!--/.Call to action-->
+
+    <hr class="my-4">
+
+    <!-- Social icons -->
+    <div class="pb-4">
+      <a href="https://www.facebook.com/mdbootstrap" target="_blank">
+        <i class="fab fa-facebook-f mr-3"></i>
+      </a>
+
+      <a href="https://twitter.com/MDBootstrap" target="_blank">
+        <i class="fab fa-twitter mr-3"></i>
+      </a>
+
+      <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
+        <i class="fab fa-youtube mr-3"></i>
+      </a>
+
+      <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
+        <i class="fab fa-google-plus-g mr-3"></i>
+      </a>
+
+      <a href="https://dribbble.com/mdbootstrap" target="_blank">
+        <i class="fab fa-dribbble mr-3"></i>
+      </a>
+
+      <a href="https://pinterest.com/mdbootstrap" target="_blank">
+        <i class="fab fa-pinterest mr-3"></i>
+      </a>
+
+      <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
+        <i class="fab fa-github mr-3"></i>
+      </a>
+
+      <a href="http://codepen.io/mdbootstrap/" target="_blank">
+        <i class="fab fa-codepen mr-3"></i>
+      </a>
+    </div>
+    <!-- Social icons -->
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © 2019 Copyright:
+      <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{% static 'PatientPanelAdd/js/jquery-3.4.1.min.js' %}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'PatientPanelAdd/js/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'PatientPanelAdd/js/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'PatientPanelAdd/js/mdb.min.js' %}"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+  </script>
+</body>
+
+</html>
+  
